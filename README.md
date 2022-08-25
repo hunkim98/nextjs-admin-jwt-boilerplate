@@ -65,15 +65,15 @@ If you see the AuthProvider onTokenReceived function, you can see that it expect
 
 ```ts  
 const onTokenReceived = (response: AxiosResponse<any, any>) => {
-const { accessToken, role, isEmailVerified } =
-    response.data as VerifiedUserResDto;
-if (role === "ADMIN") {
-    axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
-    dispatch(validateAuthentication({ accessToken }));
-    setTimeout(onSilentRefresh, JWT_EXPIRY_TIME - 60000);
-} else {
-    throw new AxiosError("Not an admin");
-}
+    const { accessToken, role, isEmailVerified } =
+        response.data as VerifiedUserResDto;
+    if (role === "ADMIN") {
+        axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
+        dispatch(validateAuthentication({ accessToken }));
+        setTimeout(onSilentRefresh, JWT_EXPIRY_TIME - 60000);
+    } else {
+        throw new AxiosError("Not an admin");
+    }
 };
 ```
 
