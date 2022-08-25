@@ -85,7 +85,7 @@ const AuthContextProvider: React.FC<Props> = ({ children }) => {
       dispatch(validateAuthentication({ accessToken }));
       setTimeout(onSilentRefresh, JWT_EXPIRY_TIME - 60000);
     } else {
-      throw new AxiosError("Not an admin", "422");
+      throw new AxiosError("Not an admin");
     }
   };
 
