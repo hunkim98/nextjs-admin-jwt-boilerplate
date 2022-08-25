@@ -13,3 +13,13 @@ This repository uses next js for its frontend framework. Currently, this reposit
 #### For Client: [nextjs-client-jwt-boilerplate](https://github.com/hunkim98/nextjs-client-jwt-boilerplate)
 
 #### For Admin: [nextjs-admin-jwt-boilerplate](https://github.com/hunkim98/nextjs-admin-jwt-boilerplate)
+
+<hr/>
+
+## Installation
+
+`yarn` or `npm install`
+
+## Explanation
+
+This repository assumes that the user model is structured as below
