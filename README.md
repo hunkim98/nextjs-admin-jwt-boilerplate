@@ -38,7 +38,7 @@ $ npm install
 
 <hr/>
 
-## Start project
+# Start project
 
 ```
 $ yarn dev
