@@ -16,7 +16,7 @@ This repository uses next js for its frontend framework. Currently, this reposit
 
 <hr/>
 
-## Previews
+# Previews
 
 #### Login screen
 <img width="1792" alt="Screen Shot 2022-08-26 at 1 19 17 AM" src="https://user-images.githubusercontent.com/57612141/186717973-c160c14e-583e-4c96-962b-10125d86876b.png">
@@ -24,7 +24,7 @@ This repository uses next js for its frontend framework. Currently, this reposit
 #### User listing
 <img width="1792" alt="Screen Shot 2022-08-26 at 1 22 15 AM" src="https://user-images.githubusercontent.com/57612141/186718339-9f1bc28b-79bd-49e2-b2ae-d9683d1f37cc.png">
 
-## Installation
+# Installation
 
 ```
 $ yarn
@@ -55,7 +55,7 @@ If you don't have any server created to test this admin site, go check my [nestj
 
 <hr/>
 
-## Explanation
+# Explanation
 
 This is an admin site for managing data in the server. Currently the admin site has only the basic functionality of listing the registered users only. You may add more functionalities as you develop your backend server.
 
