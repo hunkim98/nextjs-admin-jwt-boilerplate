@@ -16,17 +16,40 @@ This repository uses next js for its frontend framework. Currently, this reposit
 
 <hr/>
 
+## Previews
+
+#### Login screen
+<img width="1792" alt="Screen Shot 2022-08-26 at 1 19 17 AM" src="https://user-images.githubusercontent.com/57612141/186717973-c160c14e-583e-4c96-962b-10125d86876b.png">
+
+#### User listing
+<img width="1792" alt="Screen Shot 2022-08-26 at 1 22 15 AM" src="https://user-images.githubusercontent.com/57612141/186718339-9f1bc28b-79bd-49e2-b2ae-d9683d1f37cc.png">
+
 ## Installation
 
-`yarn` or `npm install`
+```
+$ yarn
+```
+
+or 
+
+```
+$ npm install
+```
 
 <hr/>
 
 ## Start project
 
-`yarn dev`
+```
+$ yarn dev
+```
 
-`Don't forget to start the server to test out the project!!!`
+or
+```
+$ npm run dev
+```
+
+#### Don't forget to start the server to test out the project!!!
 
 If you don't have any server created to test this admin site, go check my [nestjs-serverless-jwt-boilerplate](https://github.com/hunkim98/nestjs-serverless-jwt-boilerplate) to quickly begin the project.
 
