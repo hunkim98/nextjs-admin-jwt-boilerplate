@@ -1,6 +1,8 @@
+import { openContextModal } from "@mantine/modals";
 import axios, { AxiosError, AxiosResponse } from "axios";
-import { createContext, useEffect, useState } from "react";
+import { createContext, useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { LoginBodyDto } from "../../dto/Login/login.dto";
 import { VerifiedUserResDto } from "../../dto/User/user.res.dto";
 import {
   expireAuthentication,
@@ -19,6 +21,11 @@ const JWT_EXPIRY_TIME = 600 * 1000;
 interface AuthHelperElement {
   onTokenReceived: (response: AxiosResponse<any, any>) => void;
   onTokenFailure: (error: AxiosError) => void;
+  onLogin: ({
+    email,
+    password,
+  }: LoginBodyDto) => Promise<AxiosResponse<any, any>>;
+  onLogout: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthHelperElement>({} as AuthHelperElement);
@@ -32,9 +39,33 @@ const AuthContextProvider: React.FC<Props> = ({ children }) => {
       .catch(onTokenFailure);
     //jwt expire 1분전에 accessToken 다시 업데이트
   }, []);
+
+  const onLogin = useCallback(({ email, password }: LoginBodyDto) => {
+    return axios.post("/api/auth/login", {
+      email: email,
+      password: password,
+    });
+  }, []);
+
+  const onLogout = useCallback(() => {
+    return axios
+      .post("/api/auth/logout", {})
+      .then((res) => {
+        axios.defaults.headers.common["Authorization"] = ``;
+        dispatch(initializeAuthentication());
+      })
+      .catch(() => {
+        axios.defaults.headers.common["Authorization"] = ``;
+        dispatch(initializeAuthentication());
+      });
+  }, []);
+
   const onTokenFailure = (error: AxiosError) => {
-    const errorStatus = error.response!.status;
-    if (errorStatus === 401) {
+    if (
+      error.response &&
+      error.response.status &&
+      error.response.status === 401
+    ) {
       //error 401
       //refresh token has expired.
       //still show the content to the users so we do not invalidate Authentication
@@ -54,7 +85,7 @@ const AuthContextProvider: React.FC<Props> = ({ children }) => {
       dispatch(validateAuthentication({ accessToken }));
       setTimeout(onSilentRefresh, JWT_EXPIRY_TIME - 60000);
     } else {
-      alert("관리자 계정이 아닙니다");
+      throw new AxiosError("Not an admin", "422");
     }
   };
 
@@ -72,7 +103,9 @@ const AuthContextProvider: React.FC<Props> = ({ children }) => {
   //if user has loginned to service but the email is not verified,
   //email modal will show up in any website
   return (
-    <AuthContext.Provider value={{ onTokenReceived, onTokenFailure }}>
+    <AuthContext.Provider
+      value={{ onTokenReceived, onTokenFailure, onLogin, onLogout }}
+    >
       {children}
     </AuthContext.Provider>
   );
